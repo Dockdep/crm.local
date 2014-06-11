@@ -1,0 +1,54 @@
+<?php
+//p(\config::get( 'global#domains/www' ));
+
+$message_body_for_customer =
+    '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #ffffff; font-family:Arial; font-size:14px; color: #4a4a4a;">'.
+        '<tr>'.
+           '<td align="center" valign="top">'.
+                // HEADER STARTS
+                '<table width="600" cellspacing="0" cellpadding="0" border="0">'.
+                    '<tr>'.
+                        '<td height="76" width="143" valign="top" style="background: #ffffff;"></td>'.
+                        '<td height="76" valign="top" style="background: #ffffff;">'.
+                            '<a href="http://'.\config::get( 'global#domains/www' ).'" target="_blank"><img src="http://semena.dev.artwebua.com.ua/images/logo.png" width="314" height="76"></a>'.
+                        '</td>'.
+                        '<td height="76" width="143" valign="top" style="background: #ffffff;"></td>'.
+                    '</tr>'.
+                '</table>'.
+                // HEADER END
+
+                // CONTENT STARTS
+                '<table width="600" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size:14px; margin:15px 0 0 0;">'.
+                    '<tr>'.
+                        '<td width="80%" >'.
+                            '<p>Здравствуйте, '.$data['name'].'</p>'.
+                            '<p>'."\n".
+                                'Вы прошли регистрацию на сайте '.
+                                '<a href="http://'.\config::get( 'global#domains/www' ).'" target="_blank">'.
+                                \config::get( 'global#title' ).
+                                '</a>'.
+                            '</p>'.
+                            '<p>Ваш логин: '.$data['email'].'</p>'.
+                            '<p>Ваш пароль: '.$data['passwd_'].'</p>'.
+                            '<p>Будем рады ответить на ваши вопросы по телефонам:<br /> '.\config::get( 'global#phones' ).'</p>'.
+                        '</td>'.
+                    '</tr>'.
+                '</table>'.
+                '<br />'.
+
+              // CONTENT END
+
+              // FOOTER STARTS
+              '<table width="600" height="29" cellspacing="0" cellpadding="0" border="0">'.
+                  '<tr>'.
+                     '<td width="600"height="60" style="background: #4fa32c;">'.
+                         '<p style="margin:10px 10px 0 10px; color:#ffffff; font-size:11px;">ТМ "ПРОФЕСІЙНЕ НАСІННЯ" та ТМ "ПРОФЕСІФНІ ДОБРИВА" - зареєстровані торгівельні марки. Усі права захищено.</p>'.
+                     '</td>'.
+                 '</tr>'.
+              '</table>'.
+           // FOOTER END
+           '</td>'.
+        '</tr>'.
+    '</table>';
+
+echo($message_body_for_customer);

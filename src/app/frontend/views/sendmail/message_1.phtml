@@ -1,0 +1,84 @@
+<?php
+//p(\config::get( 'global#domains/www' ));
+
+$message_body_for_customer =
+    '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #ffffff; font-family:Arial; font-size:14px; color: #4a4a4a;">'.
+        '<tr>'.
+           '<td align="center" valign="top">'.
+                // HEADER STARTS
+                '<table width="600" cellspacing="0" cellpadding="0" border="0">'.
+                    '<tr>'.
+                        '<td height="76" width="143" valign="top" style="background: #ffffff;"></td>'.
+                        '<td height="76" valign="top" style="background: #ffffff;">'.
+                            '<a href="http://'.\config::get( 'global#domains/www' ).'" target="_blank"><img src="http://semena.dev.artwebua.com.ua/images/logo.png" width="314" height="76"></a>'.
+                        '</td>'.
+                        '<td height="76" width="143" valign="top" style="background: #ffffff;"></td>'.
+                    '</tr>'.
+                '</table>'.
+                // HEADER END
+
+                // CONTENT STARTS
+                '<table width="600" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size:14px; margin:15px 0 0 0;">'.
+                    '<tr>'.
+                        '<td width="80%" >'.
+                            '<p>Здравствуйте, '.$data['name'].'</p>'.
+                            '<p style="font-weight:bold;font-size:16px;">'."\n".
+                                'Ваша заявка принята. Для подтверждения заказа наш менеджер свяжется с Вами в ближайшее время.'."\n".
+                            '</p>'.
+                            '<p>Заявке присвоен номер: '.$data['proposal_number'].'</p>'.
+                            '<p>Будем рады ответить на ваши вопросы по телефонам:<br /> '.\config::get( 'global#phones' ).'</p>'.
+                        '</td>'.
+                    '</tr>'.
+                '</table>'.
+                '<br />'.
+                '<table width="600" cellpadding="10" cellspacing="0" border="0" style="border-collapse:collapse; font-size:14px;">';
+                    foreach( $data['items'] as $i )
+                    {
+                        $message_body_for_customer .= '<tr>'.
+                            '<td style="border-top: 1px solid #b7c8db; border-bottom: 1px solid #b7c8db;" width="30%">'.
+                                '<img style="height:70px;" src="'.$i['cover'].'" alt="'.$i['title'].'">'.
+                            '</td>'.
+                            '<td style="border-top: 1px solid #b7c8db; border-bottom: 1px solid #b7c8db; align:left;" width="60%">'.
+                            '<a href="http://'.\config::get( 'global#domains/www' ).$i['alias'].'" target="_blank" '."\n".'
+                                style="color: #267f00!important; text-decoration: underline;"'."\n".'
+                            ><span style="color: #267f00;">'.$i['title'].'</span></a>'."\n".
+                                '<p> '.$i['count'].'шт. по цене '.$i['price2'].' грн</p>'.
+                            '</td>'.
+                        '</tr>';
+                    }
+                        $message_body_for_customer .=
+                        '<tr>'.
+                            '<td style="border-top: 1px solid #b7c8db; border-bottom: 1px solid #b7c8db;" width="30%" colspan="2">'.
+                                '<p>Итого: '.$data['total_sum'].' грн</p>'."\n".
+                                '<p>Телефон: '.$data['phone'].'</p>'."\n".
+                                '<p>'.
+                                    'Адрес доставки: '.( !empty( $data['city'] ) ? $data['city'] : '' ).
+                                    ( !empty( $data['address'] ) ? ', '.$data['address'] : 'Не указан' )."\n".
+                                '</p>'.
+                                '<p>Email: '. ( !empty( $data['email'] ) ? $data['email'] : 'Не указан' ).'</p>'."\n".
+                                '<p>Способ доставки: '.\config::get( 'global#delivery/'.$data['delivery'] ).'</p>'."\n".
+                                '<p>Способ оплаты: '.\config::get( 'global#pay/'.$data['pay'] ).'</p>'."\n".
+                                ( ($data['delivery'] == 3 || $data['delivery'] == 4) && !empty($data['novaposhta_tnn'])
+                                ?
+                                    '<p>Номер накладной Новой Почты: '.$data['novaposhta_tnn'].'<span>. Вы можете отследить свой заказ по <a href="http://new.novaposhta.ua/cargo/?cargo_number='.$data['novaposhta_tnn'].'" target="_blank">ссылке</a>.</span></p>'."\n"
+                                :
+                                    '').
+                            '</td>'.
+                        '</tr>'.
+                    '</table>'.
+              // CONTENT END
+
+              // FOOTER STARTS
+              '<table width="600" height="29" cellspacing="0" cellpadding="0" border="0">'.
+                  '<tr>'.
+                     '<td width="600"height="60" style="background: #4fa32c;">'.
+                         '<p style="margin:10px 10px 0 10px; color:#ffffff; font-size:11px;">ТМ "ПРОФЕСІЙНЕ НАСІННЯ" та ТМ "ПРОФЕСІФНІ ДОБРИВА" - зареєстровані торгівельні марки. Усі права захищено.</p>'.
+                     '</td>'.
+                 '</tr>'.
+              '</table>'.
+           // FOOTER END
+           '</td>'.
+        '</tr>'.
+    '</table>';
+
+echo($message_body_for_customer);
